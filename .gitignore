@@ -34,3 +34,18 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+*.dll
+*.exe
+*.config
+*.png
+*.jpg
+*.wav
+*.manifest
+*.pdb
+*.cache
+*.csproj
+*.suo
+*.sln
+*.resources
+*.txt
