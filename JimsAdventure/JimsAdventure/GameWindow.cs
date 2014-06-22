@@ -21,12 +21,13 @@ namespace RPG
         private Enemy enemy;
         private int gameTime = 0;
         private bool mute = false;
+        private bool win = false;
         public GameWindow()
         {
 
             InitializeComponent();
             UpdateGame();
-            Sound.field.Play();
+            GetSound();
             gameTimer.Interval = 1000;
             gameTimer.Tick += UpdateClock;
             gameTimer.Start();
@@ -153,11 +154,7 @@ namespace RPG
             }
             else if (progress == 11)
             {
-                if (!mute)
-                {
-                    Sound.dungeon.Play();
-                }
-
+                GetSound();
                 this.BackgroundImage = Properties.Resources.PoisonSwamp;
             }
             else if (progress == 21)
@@ -170,29 +167,20 @@ namespace RPG
             }
             else if (progress == 39)
             {
+                GetSound();
                 this.BackgroundImage = Properties.Resources.DarkSpace;
             }
         }
 
         public void ResumeStory()
         {
-            if (!mute)
-            {
-                if (player.GetProgress() < 11)
-                {
-                    Sound.field.Play();
-                }
-                else
-                {
-                    Sound.dungeon.Play();
-                }
-            }
             storyTXT.Visible = true;
             advPNL.Visible = true;
             combatTXT.Visible = false;
             combatPNL.Visible = false;
             monPNL.Visible = false;
             GetMonsterIMG(-1);
+            GetSound();
             UpdateGame();
         }
 
@@ -200,10 +188,6 @@ namespace RPG
         {
             UpdateGame();
             GetMonsterIMG(manager.GetIndex());
-            if (!mute)
-            {
-                Sound.battle.PlayLooping();
-            }
             storyTXT.Visible = false;
             advPNL.Visible = false;
             combatTXT.Visible = true;
@@ -211,6 +195,7 @@ namespace RPG
             monPNL.Visible = true;
             combatTXT.Text = "";
             UpdateCombatTXT("You have encountered a " + enemy.GetName() + ".");
+            GetSound();
             UpdateGame();
         }
 
@@ -309,7 +294,8 @@ namespace RPG
 
             if (game == "WIN")
             {
-                Sound.end.Play();
+                win = true;
+                GetSound();
                 ShowMessage("Jim has saved the world. Thanks for playing! You did: \n" + gamestats[3]
                     + " moves\n" + gamestats[2] + " Damage Dealt\n" + gamestats[1] + " Damage Taken\n"
                     + gamestats[0] + " Total Battles");
@@ -324,52 +310,70 @@ namespace RPG
 
         private void Exit_Click(object sender, EventArgs e)
         {
-            Close();
-            Application.Exit();
+            if (MessageBox.Show("Confirm Exit?", "Exit", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                Application.Exit();
+            }
+
         }
 
         private void Restart_Click(object sender, EventArgs e)
         {
-            title.Show();
-            Hide();
+            if (MessageBox.Show("Do you want to restart?", "Restart", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                title = new TitleWindow();
+                title.Show();
+                this.Visible = false;
+            }
         }
-
-        private void muteBTN_Click(object sender, EventArgs e)
+        private void GetSound()
+        {
+            if (!mute)
+            {
+                if (win)
+                {
+                    Sound.end.PlayLooping();
+                }
+                else if (player.GetProgress() > 39)
+                {
+                    Sound.final.PlayLooping();
+                }
+                else if (monPNL.Visible)
+                {
+                    if (player.GetProgress() < 39)
+                    {
+                        Sound.battle.PlayLooping();
+                    }
+                }
+                else if (player.GetProgress() < 11)
+                {
+                    Sound.field.PlayLooping();
+                }
+                else
+                {
+                    Sound.dungeon.PlayLooping();
+                }
+            }
+        }
+        private void Mute_Click(object sender, EventArgs e)
         {
             if (mute)
             {
                 mute = false;
+                GetSound();
             }
             else
             {
                 mute = true;
-            }
-
-            if (!mute)
-            {
-                if (monPNL.Visible)
-                {
-                    Sound.battle.PlayLooping();
-                }
-                else if (player.GetProgress() < 11)
-                {
-                    Sound.field.Play();
-                }
-                else
-                {
-                    Sound.dungeon.Play();
-                }
-            }
-            else
-            {
                 Sound.battle.Stop();
                 Sound.field.Stop();
                 Sound.dungeon.Stop();
                 Sound.end.Stop();
                 Sound.title.Stop();
+                Sound.final.Stop();
             }
-
             UpdateGame();
         }
+
     }
 }

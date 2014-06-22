@@ -37,6 +37,7 @@ namespace RPG
             main.Show();
             this.Visible = false;
         }
+
     }
 }
 

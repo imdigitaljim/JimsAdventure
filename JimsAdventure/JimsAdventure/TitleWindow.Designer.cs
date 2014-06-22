@@ -31,7 +31,6 @@
             this.startGame = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.rpgTitle = new System.Windows.Forms.Label();
-            //this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
@@ -99,6 +98,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = global::RPG.Properties.Resources.World;
             this.ClientSize = new System.Drawing.Size(544, 415);
+            this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Letter Gothic Std", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

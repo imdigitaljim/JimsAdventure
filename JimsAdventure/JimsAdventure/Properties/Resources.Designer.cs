@@ -227,16 +227,6 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Gargoyle {
-            get {
-                object obj = ResourceManager.GetObject("Gargoyle", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Gayzer {
             get {
                 object obj = ResourceManager.GetObject("Gayzer", resourceCulture);

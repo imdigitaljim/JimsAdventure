@@ -552,7 +552,7 @@
             this.muteBTN.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.muteBTN.TabIndex = 10000;
             this.muteBTN.TabStop = false;
-            this.muteBTN.Click += new System.EventHandler(this.muteBTN_Click);
+            this.muteBTN.Click += new System.EventHandler(this.Mute_Click);
             // 
             // GameWindow
             // 
@@ -562,6 +562,7 @@
             this.BackgroundImage = global::RPG.Properties.Resources.Ruins1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(822, 554);
+            this.ControlBox = false;
             this.Controls.Add(this.topPNL);
             this.Controls.Add(this.playerPNL);
             this.Controls.Add(this.advPNL);
@@ -570,6 +571,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
             this.Name = "GameWindow";
             this.Text = "Jim\'s Adventure";
             ((System.ComponentModel.ISupportInitialize)(this.monsterIMG)).EndInit();

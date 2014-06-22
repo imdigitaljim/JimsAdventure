@@ -13,6 +13,7 @@ namespace RPG
         public static SoundPlayer battle = new SoundPlayer(Properties.Resources.Battlesound);
         public static SoundPlayer dungeon = new SoundPlayer(Properties.Resources.Dungeon9);
         public static SoundPlayer end = new SoundPlayer(Properties.Resources.Field3);
+        public static SoundPlayer final = new SoundPlayer(Properties.Resources.Battle9);
     }
     
 }
